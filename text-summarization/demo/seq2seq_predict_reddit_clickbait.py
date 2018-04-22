@@ -3,7 +3,7 @@ from __future__ import print_function
 import pandas as pd
 from keras_text_summarization.library.seq2seq import Seq2SeqSummarizer
 import numpy as np
-
+from nltk.translate.bleu_score import sentence_bleu
 
 def main():
     np.random.seed(42)
@@ -31,6 +31,8 @@ def main():
         print(i)        
         print('Original Headline: ', actual_headline)
         print('Generated Headline: ', headline)
+        blue_score = sentence_bleu([actual_headline.split()], headline.split())
+        print('BLUE score:', blue_score)
         # print('Actual Text:',x)
         print("-------------------------------------")
 

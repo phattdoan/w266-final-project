@@ -3,6 +3,7 @@ from __future__ import print_function
 import pandas as pd
 from keras_text_summarization.library.seq2seq import Seq2SeqSummarizer
 import numpy as np
+from nltk.translate.bleu_score import sentence_bleu
 
 
 def main():
@@ -26,8 +27,12 @@ def main():
         actual_headline = Y[i]
         headline = summarizer.summarize(x)
         # print('Article: ', x)
+        print("Example:",i)
         print('Generated Headline: ', headline)
         print('Original Headline: ', actual_headline)
+        blue_score = sentence_bleu([actual_headline.split()], headline.split())
+        print('BLUE score:', blue_score)
+        print("----------------------------------------------------------------")
 
 
 if __name__ == '__main__':
